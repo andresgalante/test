@@ -1,178 +1,221 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <style>
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
-
-   /* Defuault styles:
-width: narrow,
-orientation: portrait,
-update: slow,
-scan: interlace,
-monochrome: 1,
-pointer: coarse,
-hover: none
-*/
-
-/* Creates large touch areas for finguers (coarse) */
-li a {
-min-height: 4em;
-}
-
-/* Positions the navbar at the bottom for easy thumb access on small devices with portrait orientation */
-h1, nav{
-position: fixed;
-left: 0;
-right: 0;
-}
-
-/* Moves the main area to accomodate fixed header and navbar */
-main {
-padding: 1em;
-padding-bottom: 5em;
-padding-top: 5em;
-}
-
-/* Mobile first: Accomodates the brand name on the left and the navigation on the right and it wraps without the need of width media queries */
-header {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-}
-
-/* Center aligns the brand name */
-h1 {
-display: flex;
-min-height: 2.5em;
-align-items: center;
-flex: 1 0 auto;
-padding-left: 1em;
-padding-right: 1em;
-}
-
-/* Flex items to make them streach */
-nav {
-bottom: 0;
-display: flex;
-flex: 1 0 auto;
-}
-
-ul, li, li a {
-display: flex;
-flex: 1;
-}
-
-li a {
-flex: 1;
-align-items: center;
-justify-content: center;
-padding-left: 1em;
-padding-right: 1em;
-border-left: 1px solid black;
-}
-
-li:first-child a {
-border: none;
-}
-
-/* Detaches the fixed header and navbar for landscape viewports, fine pointers like a mouse and large screens */
-@media (orientation: landscape), (pointer: fine), (min-width: 45em) {
-main {
-  padding-bottom: 1em;
-  padding-top: 1em;
-}
-h1, nav {
-  position: static;
-}
-}
-
-/* Makes hit areas smaller for fine pointers like a mouse to gain viewport realestate */
-@media (pointer: fine) {
-li a {
-  min-height: 2.5em;
-}
-}
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
 
-/* Creates a vertical navigation on large landscape viewports */
-@media (orientation: landscape) and (min-width: 45em) {
-.container {
-  display: flex;
-}
+  /* Float fallback for browsers that don't support flex. This is not a full fallback for all cases. */
 
-header {
-  display: block;
-  flex: 0 0 20%;
-}
+  h1, li a {
+    min-height: 0;
+    padding: .8em;
+    display: block;
+  }
+  h1, nav {
+    position: static;
+  }
+  main {
+    display: block;
+    padding: .8em;
+  }
 
-header h1{
-  min-height: 6em;
-}
+  /* floats instead of flex the navbar */
+  li {
+    float: left;
+    width: 25%;
+  }
 
-ul, li {
-  display: block;
-}
+  /* Clearfixes the nav unorder list */
+  ul:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-li a, li:first-child a {
-  justify-content: start;
-  border-left: 0;
-  border-bottom: 1px solid black;
-}
-}
+  /* Defuault styles:
+  width: narrow,
+  orientation: portrait,
+  update: slow,
+  scan: interlace,
+  monochrome: 1,
+  pointer: coarse,
+  hover: none
+  */
 
-/* Adds an animation on devices that are capable to render animations smoothly. Filters devices like Kindles, TVs, touch devices */
-@media (update: fast), (scan: progressive), (hover: hover) {
-li a {
-  transition: all 0.3s ease-in-out;
-}
-}
+  /* Creates large touch areas for finguers (coarse) */
+  @supports (display: flex) {
+    li a {
+      min-height: 4em;
+    }
 
-/* Removes underlines on links for color screens */
-@media (color) {
-li a { text-decoration: none; }
-}
+    /* Positions the navbar at the bottom for easy thumb access on small devices with portrait orientation */
+    h1, nav{
+      position: fixed;
+      left: 0;
+      right: 0;
+    }
 
-/* Increases borders to 2px on interlace screens like plasma TVs */
-@media (scan: interlace) {
-  li a, li:first-child a {
-  border-width: 2px;
-}
-}
+    /* Moves the main area to accomodate fixed header and navbar */
+    main {
+      display: block;
+      padding: 1em;
+      padding-bottom: 5em;
+      padding-top: 5em;
+    }
+  }
 
-/* General make up: colors, fonts, etc */
-html, body, .container { box-size: border-box; height: 100vh; }
-body { font-family: sans-serif; line-height: 1.5; }
-header { background: #393f44; border-top: 4px solid #00a8e1; color: white; }
-nav { background: #292e34; }
-h1 { background: #030303; font-weight: bold; }
-li a { color: rgba(255,255,255,.6); }
-li a:hover { background: #393f44; color: white }
-h2, p { margin-bottom: 1em; }
-h2 {font-weight: 700; }
-   </style>
-  </head>
-  <body>
-    <div class="container">
-  <header role="banner">
-    <h1>Brand Name</h1>
-    <nav>
-      <ul>
-        <li><a href="#main">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/login">Login</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main id="main">
-    <h2>Content goes here</h2>
+  /* Mobile first: Accomodates the brand name on the left and the navigation on the right and it wraps without the need of width media queries */
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deserunt, suscipit velit itaque vitae necessitatibus, impedit pariatur eos. Pariatur beatae sed repellendus iusto doloribus quidem asperiores quia exercitationem sint dicta!</p>
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
-  </main>
-</div>
-  </body>
+  /* Center aligns the brand name */
+
+  @supports (display: flex) {
+    h1 {
+      min-height: 2.5em;
+      padding: 0 1em;
+      display: flex;
+      align-items: center;
+      flex: 1 0 auto;
+    }
+  }
+
+  /* Flex items to make them streach */
+  nav {
+    bottom: 0;
+    display: flex;
+    flex: 1 0 auto;
+  }
+
+  ul, li, li a {
+    display: flex;
+    flex: 1;
+    text-align: center;
+  }
+  li a {
+    border-left: 1px solid black;
+  }
+
+  @supports (display: flex) {
+    li a {
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1em;
+      border-left: 1px solid black;
+    }
+  }
+  li:first-child a {
+    border: none;
+  }
+
+  /* Detaches the fixed header and navbar for landscape viewports, fine pointers like a mouse and large screens */
+  @media (orientation: landscape), (pointer: fine), (min-width: 45em) {
+    main {
+      padding-bottom: 1em;
+      padding-top: 1em;
+    }
+    h1, nav {
+      position: static;
+    }
+  }
+
+  /* Makes hit areas smaller for fine pointers like a mouse to gain viewport realestate */
+  @media (pointer: fine) {
+    li a {
+      min-height: 2.5em;
+    }
+  }
+
+
+  /* Creates a vertical navigation on large landscape viewports */
+  @media (orientation: landscape) and (min-width: 45em) {
+    .container {
+      display: flex;
+    }
+
+    header {
+      display: block;
+      flex: 0 0 20%;
+    }
+
+    h1{
+      min-height: 6em;
+    }
+
+    @supports (display: flex) {
+      ul, li {
+        display: block;
+        float: none;
+        width: auto;
+      }
+    }
+
+    li a, li:first-child a {
+      justify-content: start;
+      border-left: 0;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  /* Adds an animation on devices that are capable to render animations smoothly. Filters devices like Kindles, TVs, touch devices */
+  @media (update: fast), (scan: progressive), (hover: hover) {
+    li a {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  /* Removes underlines on links for color screens */
+  @media (color) {
+    li a { text-decoration: none; }
+  }
+
+  /* Increases borders to 2px on interlace screens like plasma TVs */
+  @media (scan: interlace) {
+    li a, li:first-child a {
+      border-width: 2px;
+    }
+  }
+
+  /* General make up: colors, fonts, etc */
+  html, body, .container { box-size: border-box; height: 100vh; }
+  body { font-family: sans-serif; line-height: 1.5; }
+  header { background: #393f44; border-top: 4px solid #00a8e1; color: white; }
+  nav { background: #292e34; }
+  h1 { background: #030303; font-weight: bold; }
+  li a { color: rgba(255,255,255,.6); }
+  li a:hover { background: #393f44; color: white }
+  h2, p { margin-bottom: 1em; }
+  h2 {font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header role="banner">
+      <h1>Brand Name</h1>
+      <nav>
+        <ul>
+          <li><a href="#main">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <h2>Content goes here</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deserunt, suscipit velit itaque vitae necessitatibus, impedit pariatur eos. Pariatur beatae sed repellendus iusto doloribus quidem asperiores quia exercitationem sint dicta!</p>
+
+    </main>
+  </div>
+</body>
 </html>
